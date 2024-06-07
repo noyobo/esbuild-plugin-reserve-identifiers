@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`index esbuild-plugin-reserve-identifiers async 1`] = `
+[
+  ""use strict";(()=>{ty,wx;var o=async()=>"foo";ty,wx;var r=async()=>"bar";ty,wx;Promise.all([o(),r()]).then(([t,n])=>{console.warn(t,n)});})();
+",
+]
+`;
+
+exports[`index esbuild-plugin-reserve-identifiers basic 1`] = `
+[
+  ""use strict";(()=>{ty,wx;var o=1,c="1 + 1";console.log(o,c);})();
+",
+]
+`;
+
+exports[`index esbuild-plugin-reserve-identifiers react 1`] = `
+[
+  ""use strict";(()=>{var p=Object.create;var l=Object.defineProperty;var s=Object.getOwnPropertyDescriptor;var v=Object.getOwnPropertyNames;var a=Object.getPrototypeOf,u=Object.prototype.hasOwnProperty;var c=(o=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(o,{get:(r,e)=>(typeof require<"u"?require:r)[e]}):o)(function(o){if(typeof require<"u")return require.apply(this,arguments);throw Error('Dynamic require of "'+o+'" is not supported')});var y=(o,r,e,n)=>{if(r&&typeof r=="object"||typeof r=="function")for(let t of v(r))!u.call(o,t)&&t!==e&&l(o,t,{get:()=>r[t],enumerable:!(n=s(r,t))||n.enumerable});return o};var b=(o,r,e)=>(e=o!=null?p(a(o)):{},y(r||!o||!o.__esModule?l(e,"default",{value:o,enumerable:!0}):e,o));var d=b(c("react")),i=c("react-dom/client");ty,wx;var f=()=>(console.warn("Hello World"),d.default.createElement("div",null,"Hello World")),m=document.createElement("div");document.body.appendChild(m);var w=(0,i.createRoot)(m);w.render(d.default.createElement(f,null));})();
+",
+  "body{color:#0074d9}
+",
+]
+`;
+
+exports[`index esbuild-plugin-reserve-identifiers react-jsx 1`] = `
+[
+  ""use strict";(()=>{var p=Object.create;var l=Object.defineProperty;var s=Object.getOwnPropertyDescriptor;var v=Object.getOwnPropertyNames;var a=Object.getPrototypeOf,u=Object.prototype.hasOwnProperty;var c=(o=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(o,{get:(r,e)=>(typeof require<"u"?require:r)[e]}):o)(function(o){if(typeof require<"u")return require.apply(this,arguments);throw Error('Dynamic require of "'+o+'" is not supported')});var y=(o,r,e,n)=>{if(r&&typeof r=="object"||typeof r=="function")for(let t of v(r))!u.call(o,t)&&t!==e&&l(o,t,{get:()=>r[t],enumerable:!(n=s(r,t))||n.enumerable});return o};var b=(o,r,e)=>(e=o!=null?p(a(o)):{},y(r||!o||!o.__esModule?l(e,"default",{value:o,enumerable:!0}):e,o));var d=b(c("react")),i=c("react-dom/client");ty,wx;var f=()=>(console.warn("Hello World"),d.default.createElement("div",null,"Hello World")),m=document.createElement("div");document.body.appendChild(m);var w=(0,i.createRoot)(m);w.render(d.default.createElement(f,null));})();
+",
+  "body{color:#0074d9}
+",
+]
+`;
