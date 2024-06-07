@@ -10,22 +10,75 @@ const loaderMap: Record<string, Loader> = {
   '.mjs': 'js',
 };
 
-export function reserveIdentifiersPlugin(options: { filter?: RegExp; reserveIdentifiers: string[] }) {
+function isObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+function isString(value: unknown): value is string {
+  return typeof value === 'string';
+}
+
+function isArray(value: unknown): value is unknown[] {
+  return Array.isArray(value);
+}
+
+function slash(path: string) {
+  const isExtendedLengthPath = path.startsWith('\\\\?\\');
+
+  if (isExtendedLengthPath) {
+    return path;
+  }
+
+  return path.replace(/\\/g, '/');
+}
+
+export function reserveIdentifiersPlugin(options: { filter?: RegExp; identifiers: string[] }) {
   return {
     name: 'reserve-identifiers',
     setup(build) {
-      const reserveIdentifiersCode = `(${options.reserveIdentifiers.join(',')});\n`;
+      const reserveIdentifiersCode = `(${options.identifiers.map(key => `typeof ${key}`).join(',')});\n`;
+
+      const initialOptions = build.initialOptions;
+
+      const entryPoints = initialOptions.entryPoints;
+
+      function isEntryPoint(filePath: string) {
+        if (isObject(entryPoints)) {
+          return Object.values(entryPoints).some(entryPoint => {
+            if (isString(entryPoint)) {
+              return slash(path.resolve(entryPoint)) === slash(filePath);
+            }
+            return false;
+          });
+        }
+        if (isArray(entryPoints)) {
+          return entryPoints.some(entryPoint => {
+            if (isString(entryPoint)) {
+              return slash(path.resolve(entryPoint)) === slash(filePath);
+            }
+            if (isObject(entryPoint)) {
+              const inputPath = entryPoint.in;
+              return slash(path.resolve(inputPath)) === slash(filePath);
+            }
+            return false;
+          });
+        }
+      }
 
       build.onLoad({ filter: options?.filter || /\.([tj]sx?|mjs)$/ }, args => {
-        return new Promise<OnLoadResult>(resolve => {
-          const extname = path.extname(args.path);
-          const content = fs.readFileSync(args.path, 'utf-8');
-          resolve({
-            contents: reserveIdentifiersCode + content,
-            watchFiles: [args.path],
-            loader: loaderMap[extname] || 'js',
+        if (isEntryPoint(args.path)) {
+          return new Promise<OnLoadResult>(resolve => {
+            const extname = path.extname(args.path);
+            const content = fs.readFileSync(args.path, 'utf-8');
+            const code = reserveIdentifiersCode + content;
+            resolve({
+              contents: code,
+              watchFiles: [args.path],
+              loader: loaderMap[extname] || 'js',
+            });
           });
-        });
+        }
+        return null;
       });
     },
   } as Plugin;
