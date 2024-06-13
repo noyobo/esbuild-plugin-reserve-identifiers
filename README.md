@@ -36,7 +36,8 @@ esbuild.build({
   // ...
   plugins: [
     reserveIdentifiersPlugin({
-      reserveIdentifiers: ['ga', 't'],
+      filter: /\.([tj]sx?|mjs)$/, // default filter
+      identifiers: ['ga', 't'],
     }),
   ],
 })
