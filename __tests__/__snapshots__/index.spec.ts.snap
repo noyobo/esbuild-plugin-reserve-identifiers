@@ -2,21 +2,21 @@
 
 exports[`index esbuild-plugin-reserve-identifiers async 1`] = `
 [
-  ""use strict";(()=>{var oo=async()=>"foo";var to=async()=>"bar";Promise.all([oo(),to()]).then(([eo,fo])=>{console.warn(eo,fo)});})();
+  ""use strict";(()=>{var eo=(fo,po,to)=>new Promise((co,no)=>{var mo=oo=>{try{yo(to.next(oo))}catch(ro){no(ro)}},bo=oo=>{try{yo(to.throw(oo))}catch(ro){no(ro)}},yo=oo=>oo.done?co(oo.value):Promise.resolve(oo.value).then(mo,bo);yo((to=to.apply(fo,po)).next())});var ao=()=>eo(void 0,null,function*(){return"foo"});var so=()=>eo(void 0,null,function*(){return"bar"});Promise.all([ao(),so()]).then(([fo,po])=>{console.warn(fo,po)});})();
 ",
 ]
 `;
 
 exports[`index esbuild-plugin-reserve-identifiers basic 1`] = `
 [
-  ""use strict";(()=>{var a=1,b="1 + 1";console.log(a,b);})();
+  ""use strict";(()=>{var oo=()=>{console.log("a")},to=()=>{console.log("b")},eo=()=>{console.log("c")},yo=()=>{console.log("d")},fo=()=>{console.log("e")},po=()=>{console.log("f")},co=()=>{console.log("g")},lo=()=>{console.log("h")},no=()=>{console.log("i")},so=()=>{console.log("j")},go=()=>{console.log("k")},_o=()=>{console.log("l")},wo=()=>{console.log("m")},xo=()=>{console.log("n")},ao=()=>{console.log("o")},bo=()=>{console.log("p")},ho=()=>{console.log("q")},io=()=>{console.log("r")},jo=()=>{console.log("s")},ko=()=>{console.log("t")},mo=()=>{console.log("u")},qo=()=>{console.log("v")},ro=()=>{console.log("w")},uo=()=>{console.log("x")},vo=()=>{console.log("y")},zo=()=>{console.log("z")};oo();to();eo();yo();fo();po();co();lo();no();so();go();_o();wo();xo();ao();bo();ho();io();jo();ko();mo();qo();ro();uo();vo();zo();})();
 ",
 ]
 `;
 
 exports[`index esbuild-plugin-reserve-identifiers react 1`] = `
 [
-  ""use strict";(()=>{var io=Object.create;var ro=Object.defineProperty;var mo=Object.getOwnPropertyDescriptor;var so=Object.getOwnPropertyNames;var vo=Object.getPrototypeOf,ao=Object.prototype.hasOwnProperty;var no=(oo=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(oo,{get:(eo,to)=>(typeof require<"u"?require:eo)[to]}):oo)(function(oo){if(typeof require<"u")return require.apply(this,arguments);throw Error('Dynamic require of "'+oo+'" is not supported')});var uo=(oo,eo,to,fo)=>{if(eo&&typeof eo=="object"||typeof eo=="function")for(let po of so(eo))!ao.call(oo,po)&&po!==to&&ro(oo,po,{get:()=>eo[po],enumerable:!(fo=mo(eo,po))||fo.enumerable});return oo};var bo=(oo,eo,to)=>(to=oo!=null?io(vo(oo)):{},uo(eo||!oo||!oo.__esModule?ro(to,"default",{value:oo,enumerable:!0}):to,oo));var yo=bo(no("react")),lo=no("react-dom/client");var wo=()=>(console.warn("Hello World"),yo.default.createElement("div",null,"Hello World")),co=document.createElement("div");document.body.appendChild(co);var Ho=(0,lo.createRoot)(co);Ho.render(yo.default.createElement(wo,null));})();
+  ""use strict";(()=>{var io=Object.create;var ro=Object.defineProperty;var mo=Object.getOwnPropertyDescriptor;var so=Object.getOwnPropertyNames;var vo=Object.getPrototypeOf,ao=Object.prototype.hasOwnProperty;var no=(oo=>typeof require!="undefined"?require:typeof Proxy!="undefined"?new Proxy(oo,{get:(eo,to)=>(typeof require!="undefined"?require:eo)[to]}):oo)(function(oo){if(typeof require!="undefined")return require.apply(this,arguments);throw Error('Dynamic require of "'+oo+'" is not supported')});var uo=(oo,eo,to,fo)=>{if(eo&&typeof eo=="object"||typeof eo=="function")for(let po of so(eo))!ao.call(oo,po)&&po!==to&&ro(oo,po,{get:()=>eo[po],enumerable:!(fo=mo(eo,po))||fo.enumerable});return oo};var bo=(oo,eo,to)=>(to=oo!=null?io(vo(oo)):{},uo(eo||!oo||!oo.__esModule?ro(to,"default",{value:oo,enumerable:!0}):to,oo));var yo=bo(no("react")),lo=no("react-dom/client");var wo=()=>(console.warn("Hello World"),yo.default.createElement("div",null,"Hello World")),co=document.createElement("div");document.body.appendChild(co);var Ho=(0,lo.createRoot)(co);Ho.render(yo.default.createElement(wo,null));})();
 ",
   "body{color:#0074d9}
 ",
@@ -25,7 +25,7 @@ exports[`index esbuild-plugin-reserve-identifiers react 1`] = `
 
 exports[`index esbuild-plugin-reserve-identifiers react-jsx 1`] = `
 [
-  ""use strict";(()=>{var io=Object.create;var ro=Object.defineProperty;var mo=Object.getOwnPropertyDescriptor;var so=Object.getOwnPropertyNames;var vo=Object.getPrototypeOf,ao=Object.prototype.hasOwnProperty;var no=(oo=>typeof require<"u"?require:typeof Proxy<"u"?new Proxy(oo,{get:(eo,to)=>(typeof require<"u"?require:eo)[to]}):oo)(function(oo){if(typeof require<"u")return require.apply(this,arguments);throw Error('Dynamic require of "'+oo+'" is not supported')});var uo=(oo,eo,to,fo)=>{if(eo&&typeof eo=="object"||typeof eo=="function")for(let po of so(eo))!ao.call(oo,po)&&po!==to&&ro(oo,po,{get:()=>eo[po],enumerable:!(fo=mo(eo,po))||fo.enumerable});return oo};var bo=(oo,eo,to)=>(to=oo!=null?io(vo(oo)):{},uo(eo||!oo||!oo.__esModule?ro(to,"default",{value:oo,enumerable:!0}):to,oo));var yo=bo(no("react")),lo=no("react-dom/client");var wo=()=>(console.warn("Hello World"),yo.default.createElement("div",null,"Hello World")),co=document.createElement("div");document.body.appendChild(co);var Ho=(0,lo.createRoot)(co);Ho.render(yo.default.createElement(wo,null));})();
+  ""use strict";(()=>{var io=Object.create;var ro=Object.defineProperty;var mo=Object.getOwnPropertyDescriptor;var so=Object.getOwnPropertyNames;var vo=Object.getPrototypeOf,ao=Object.prototype.hasOwnProperty;var no=(oo=>typeof require!="undefined"?require:typeof Proxy!="undefined"?new Proxy(oo,{get:(eo,to)=>(typeof require!="undefined"?require:eo)[to]}):oo)(function(oo){if(typeof require!="undefined")return require.apply(this,arguments);throw Error('Dynamic require of "'+oo+'" is not supported')});var uo=(oo,eo,to,fo)=>{if(eo&&typeof eo=="object"||typeof eo=="function")for(let po of so(eo))!ao.call(oo,po)&&po!==to&&ro(oo,po,{get:()=>eo[po],enumerable:!(fo=mo(eo,po))||fo.enumerable});return oo};var bo=(oo,eo,to)=>(to=oo!=null?io(vo(oo)):{},uo(eo||!oo||!oo.__esModule?ro(to,"default",{value:oo,enumerable:!0}):to,oo));var yo=bo(no("react")),lo=no("react-dom/client");var wo=()=>(console.warn("Hello World"),yo.default.createElement("div",null,"Hello World")),co=document.createElement("div");document.body.appendChild(co);var Ho=(0,lo.createRoot)(co);Ho.render(yo.default.createElement(wo,null));})();
 ",
   "body{color:#0074d9}
 ",

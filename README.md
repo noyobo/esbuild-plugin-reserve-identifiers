@@ -36,7 +36,7 @@ esbuild.build({
   // ...
   plugins: [
     reserveIdentifiersPlugin({
-      reserveIdentifiers: ['ga', 't'],
+      identifiers: ['ga', 't'],
     }),
   ],
 })

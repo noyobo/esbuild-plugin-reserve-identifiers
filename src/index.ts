@@ -1,6 +1,6 @@
-import { Loader, OnLoadResult, Plugin } from 'esbuild';
 import fs from 'fs';
 import path from 'path';
+import { Loader, Plugin } from 'esbuild';
 
 const loaderMap: Record<string, Loader> = {
   '.ts': 'ts',
@@ -32,19 +32,29 @@ function slash(path: string) {
   return path.replace(/\\/g, '/');
 }
 
-export function reserveIdentifiersPlugin(options: { filter?: RegExp; identifiers: string[] }) {
+export function reserveIdentifiersPlugin(
+  options:
+    | { filter?: RegExp; identifiers: string[] }
+    | {
+        filter?: RegExp;
+        /**
+         * @deprecated Use `identifiers` instead
+         */
+        reserveIdentifiers: string[];
+      }
+) {
   return {
     name: 'reserve-identifiers',
     setup(build) {
-      const reserveIdentifiersCode = `(${options.identifiers.map(key => `typeof ${key}`).join(',')});\n`;
+      const identifiers = 'reserveIdentifiers' in options ? options.reserveIdentifiers : options.identifiers;
+      const reserveIdentifiersCode = `(${identifiers.map((key) => `typeof ${key}`).join(',')});\n`;
 
       const initialOptions = build.initialOptions;
-
       const entryPoints = initialOptions.entryPoints;
 
       function isEntryPoint(filePath: string) {
         if (isObject(entryPoints)) {
-          return Object.values(entryPoints).some(entryPoint => {
+          return Object.values(entryPoints).some((entryPoint) => {
             if (isString(entryPoint)) {
               return slash(path.resolve(entryPoint)) === slash(filePath);
             }
@@ -52,7 +62,7 @@ export function reserveIdentifiersPlugin(options: { filter?: RegExp; identifiers
           });
         }
         if (isArray(entryPoints)) {
-          return entryPoints.some(entryPoint => {
+          return entryPoints.some((entryPoint) => {
             if (isString(entryPoint)) {
               return slash(path.resolve(entryPoint)) === slash(filePath);
             }
@@ -65,18 +75,13 @@ export function reserveIdentifiersPlugin(options: { filter?: RegExp; identifiers
         }
       }
 
-      build.onLoad({ filter: options?.filter || /\.([tj]sx?|mjs)$/ }, args => {
+      build.onLoad({ filter: options?.filter || /\.([tj]sx?|mjs)$/ }, async (args) => {
         if (isEntryPoint(args.path)) {
-          return new Promise<OnLoadResult>(resolve => {
-            const extname = path.extname(args.path);
-            const content = fs.readFileSync(args.path, 'utf-8');
-            const code = reserveIdentifiersCode + content;
-            resolve({
-              contents: code,
-              watchFiles: [args.path],
-              loader: loaderMap[extname] || 'js',
-            });
-          });
+          const extname = path.extname(args.path);
+          const content = fs.readFileSync(args.path, 'utf-8');
+
+          const code = reserveIdentifiersCode + content;
+          return { contents: code, watchFiles: [args.path], loader: loaderMap[extname] || 'js' };
         }
         return null;
       });
